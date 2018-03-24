@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页</title>
+</head>
+<body>
+	<h1>哈哈哈哈</h1>
+	<form>
+		<label for="txt">username</label><br/>
+		<input id="txt" type="text" name=""></br>
+		<label for="pwd">password</label></br>
+		<input id="pwd" type="password" name="">
+		<button>登录</button>
+	</form>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+		var user = location.search.split("=")[1];
+		$("#txt").val(user);
+
+	$("button").click(function(e){
+		e.preventDefault();
+		$.post("/login", {//该ajax请求指向的是后台路由（express.js中的路由）
+			username: $("#txt").val(),
+			password: $("#pwd").val()
+		}, function(data){
+			if(!data.code){
+				alert(data.msg);
+				location.assign("/comment.html?name="+$("#txt").val());
+			}else{
+				alert(data.msg);
+			}
+		})
+
+	})
+</script>
+</body>
+</html>

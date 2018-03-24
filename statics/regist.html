@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="form-group">
+		    <label for="exampleInputEmail1">用户名</label>
+		    <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+		 </div>
+		 <div class="form-group">
+		    <label for="exampleInputPassword1">密码</label>
+		    <input type="password" class="form-control" id="pwd" placeholder="密码">
+		 </div>
+		 <div class="form-group">
+		    <label for="exampleInputPassword1">密码</label>
+		    <input type="password" class="form-control" id="pwd1" placeholder="确认密码">
+		 </div>
+		<button class="btn btn-success">确定</button>
+	</div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+	$(".btn").click(function(){
+		var name = $("#username").val(),
+			pwd = $("#pwd").val(),
+			pwd1 = $("#pwd1").val();
+		if(!pwd){
+			alert("密码不能为空");
+			return;
+		}
+		if(pwd !== pwd1){
+			alert("密码不一致");
+			return;
+		}
+		$.post("/regist", {name, pwd}, function(data){
+			if(!data.code){
+				location.assign("/comment.html?name="+name);
+			}else{
+				alert(data.msg);
+				location.assign("/login.html?name="+name);
+			}
+		})
+
+	})
+</script>
+</body>
+</html>
